@@ -97,3 +97,12 @@ store.dispatch(removeExpense({ id: expenseTwo.expense.id }));
 //     endDate: undefined
 //   }
 // };
+const user = {
+  name: 'Seba',
+  age: 29,
+  city: 'Melipilla'
+}
+
+console.log({
+  ...user
+});
