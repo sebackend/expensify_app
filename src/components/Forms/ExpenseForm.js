@@ -10,6 +10,7 @@ export default class ExpenseForm extends React.Component {
     amount: '',
     createdAt: moment(),
     calendarFocused: false,
+    error: '',
   };
 
   onDescriptionChange = (e) => {
@@ -26,19 +27,43 @@ export default class ExpenseForm extends React.Component {
   onAmountChange = (e) => {
     const amount = e.target.value;
     
-    if (amount.match(/^\d*(\.\d{0,2})?$/)) {
+    if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
       this.setState(() => ({ amount }));
     }
   };
 
-  onDateChange = createdAt => this.setState({ createdAt });
+  onDateChange = createdAt => {
+    if (createdAt){
+      this.setState({ createdAt });
+    }
+  };
 
   onFocusChange = ({ focused }) => this.setState({ calendarFocused: focused });
 
+  onSubmit = (e) => {
+    e.preventDefault();
+
+    const { description, amount, createdAt, note } = this.state;
+
+    if (!description || !amount) {
+      this.setState({ error: 'ERROR!!' })
+    }else{
+      this.setState({ error: '' })
+      this.props.onSubmit({
+        description: description,
+        amount: parseFloat(amount, 10) * 100,
+        createdAt: createdAt.valueOf(),
+        note: note
+      });
+    }
+  };
+
   render () {
+    const { error } = this.state;
     return (
       <div>
-        <form>
+        {error && (<p>{error}</p>)}
+        <form onSubmit={this.onSubmit}>
           <input 
             type="text"
             placeholder="Description"
