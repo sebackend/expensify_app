@@ -37,7 +37,7 @@ test('should setup addExpense action object with provided values', () => {
   });
 });
 
-test('should setup addExpense action objectwith default values', () => {
+test('should setup addExpense action object with default values', () => {
   const action = addExpense();
 
   expect(action).toEqual({
