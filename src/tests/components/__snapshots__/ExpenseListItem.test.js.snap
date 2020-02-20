@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ListItem correctly 1`] = `
+<div>
+  <h3>
+    Gum
+  </h3>
+  <p>
+    <Link
+      to="/edit/1"
+    >
+      195
+       - 
+      0
+    </Link>
+  </p>
+</div>
+`;
